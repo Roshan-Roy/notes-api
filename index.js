@@ -28,9 +28,6 @@ app.use(rateLimiter({
     windowMs: 15 * 60 * 1000, //15 minutes
     max: 100 //100 requests per 15 minutes
 }))
-app.get("/",(req,res) => {
-    res.status(200).send("success")
-})
 app.use(express.json())
 app.use(helmet())
 app.use(cors())
