@@ -4,7 +4,7 @@ const Note = require("../model/Note")
 
 //get all notes
 const getAllNotes = async (req, res) => {
-    const { userid } = req.user
+    const userid = req.userid
     const queryObj = {}
     const { search, sort } = req.query
     if (search) {
@@ -30,7 +30,7 @@ const getAllNotes = async (req, res) => {
 
 //get a note
 const getNote = async (req, res) => {
-    const { userid } = req.user
+    const userid = req.userid
     const { id } = req.params
     const note = await Note.findOne({
         _id: id,
@@ -44,7 +44,7 @@ const getNote = async (req, res) => {
 
 //create new note
 const createNote = async (req, res) => {
-    const { userid } = req.user
+    const userid = req.userid
     const { title, description } = req.body
     const newNote = await Note.create({
         title,
@@ -56,7 +56,7 @@ const createNote = async (req, res) => {
 
 //update note
 const updateNote = async (req, res) => {
-    const { userid } = req.user
+    const userid = req.userid
     const { id } = req.params
     const { title, description } = req.body
     const updatedNote = await Note.findOneAndUpdate({
@@ -77,11 +77,11 @@ const updateNote = async (req, res) => {
 
 //delete note
 const deleteNote = async (req, res) => {
-    const { userid } = req.user
+    const userid = req.userid
     const { id } = req.params
     const deletedNote = await Note.findOneAndDelete({
-        _id:id,
-        createdBy:userid
+        _id: id,
+        createdBy: userid
     })
     if (!deletedNote) {
         throw new NotFoundError(`no note found with id ${id}`)

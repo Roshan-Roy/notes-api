@@ -10,7 +10,7 @@ const authorization = (req, res, next) => {
     const token = authHeader.split(" ")[1]
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
-        req.user = { username: decoded.username, userid: decoded.userid }
+        req.userid = decoded.userid
         next()
     } catch (error) {
         throw new AuthorizationError("unable to authorize")
