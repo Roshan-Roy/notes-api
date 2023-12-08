@@ -4,7 +4,7 @@
   "description": "api for a notes app",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "author": "roshan roy",
   "license": "ISC",
