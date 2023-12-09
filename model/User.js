@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, "name is required"],
-        match:[/^[a-zA-Z\s]{2,20}$/,"please provide a valid name"],
+        match:[/^[a-zA-Z\s]{2,30}$/,"please provide a valid name"],
         trim: true
     },
     username: {
@@ -21,8 +21,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "password is requied"],
         minLength: [6, "min length for password is 6"],
-        maxLength: [12, "max length for password is 12"],
-        trim: true
+        maxLength: [12, "max length for password is 12"]
     }
 
 })
