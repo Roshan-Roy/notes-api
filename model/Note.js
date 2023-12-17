@@ -16,6 +16,10 @@ const notesSchema = new mongoose.Schema({
     createdBy: {
         type: mongoose.Types.ObjectId,
         ref: "User"
+    },
+    starred: {
+        type: Boolean,
+        default: false
     }
 }, { timestamps: true })
 
