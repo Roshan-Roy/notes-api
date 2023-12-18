@@ -25,8 +25,8 @@ const connectDB = require("./db/connect")
 //app.use
 app.set("trust proxy", 1)
 app.use(rateLimiter({
-    windowMs: 15 * 60 * 1000, //15 minutes
-    max: 100 //100 requests per 15 minutes
+    windowMs: 2 * 60 * 1000, //2 minutes
+    max: 150 //150 requests per 2 minutes
 }))
 app.use(express.json())
 app.use(helmet())
