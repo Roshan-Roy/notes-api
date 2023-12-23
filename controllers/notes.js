@@ -45,10 +45,11 @@ const getNote = async (req, res) => {
 //create new note
 const createNote = async (req, res) => {
     const userid = req.userid
-    const { title, description } = req.body
+    const { title, description,starred } = req.body
     const newNote = await Note.create({
         title,
         description,
+        starred,
         createdBy: userid
     })
     res.status(StatusCodes.CREATED).json({ message: "note created", data: newNote })

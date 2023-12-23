@@ -19,7 +19,7 @@ const notesSchema = new mongoose.Schema({
     },
     starred: {
         type: Boolean,
-        default: false
+        required:[true,"specify whether the note is starred or not"]
     }
 }, { timestamps: true })
 
