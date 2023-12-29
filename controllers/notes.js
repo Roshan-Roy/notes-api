@@ -45,7 +45,7 @@ const getNote = async (req, res) => {
 //create new note
 const createNote = async (req, res) => {
     const userid = req.userid
-    const { title, description,starred } = req.body
+    const { title, description, starred } = req.body
     const newNote = await Note.create({
         title,
         description,
@@ -59,13 +59,14 @@ const createNote = async (req, res) => {
 const updateNote = async (req, res) => {
     const userid = req.userid
     const { id } = req.params
-    const { title, description } = req.body
+    const { title, description, starred } = req.body
     const updatedNote = await Note.findOneAndUpdate({
         _id: id,
         createdBy: userid
     }, {
         title,
-        description
+        description,
+        starred
     }, {
         new: true,
         runValidators: true
@@ -90,52 +91,10 @@ const deleteNote = async (req, res) => {
     res.status(StatusCodes.OK).json({ message: "note deleted", data: deletedNote })
 }
 
-//star note
-const starNote = async (req, res) => {
-    const userid = req.userid
-    const { id } = req.params
-    const starredNote = await Note.findOneAndUpdate({
-        _id: id,
-        createdBy: userid
-    }, {
-        starred: true
-    }, {
-        timestamps: false,
-        new: true
-    })
-    if (!starredNote) {
-        throw new NotFoundError(`no note found with id ${id}`)
-    }
-    res.status(StatusCodes.OK).json({ message: "note starred", data: starredNote })
-
-}
-
-//unstar note
-const unstarNote = async (req, res) => {
-    const userid = req.userid
-    const { id } = req.params
-    const unstarredNote = await Note.findOneAndUpdate({
-        _id: id,
-        createdBy: userid
-    }, {
-        starred: false
-    }, {
-        timestamps: false,
-        new: true
-    })
-    if (!unstarredNote) {
-        throw new NotFoundError(`no note found with id ${id}`)
-    }
-    res.status(StatusCodes.OK).json({ message: "note unstarred", data: unstarredNote })
-
-}
-
 module.exports = {
     getAllNotes,
     getNote,
     createNote,
     updateNote,
-    deleteNote,
-    starNote,
-    unstarNote
+    deleteNote
 }

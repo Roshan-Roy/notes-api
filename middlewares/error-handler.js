@@ -13,7 +13,7 @@ const errorHandler = (error, req, res, next) => {
         customError.statusCode = StatusCodes.BAD_REQUEST
     }
     if(error.name === "CastError"){
-        customError.message = `no note found with id ${error.value}`
+        customError.message = `${error.value} is not of type ${error.kind}`
         customError.statusCode = StatusCodes.NOT_FOUND
     }
     res.status(customError.statusCode).json({ message: customError.message })
